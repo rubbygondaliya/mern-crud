@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <>
-    <Project />
+    <RegisterForm />
   </>,
   document.getElementById('root')
 );

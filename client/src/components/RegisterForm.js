@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const RegisterForm = () => {
@@ -21,6 +22,9 @@ const RegisterForm = () => {
         if(e.target.name === 'fresher'){
             setFormData({...formData, [e.target.name] : e.target.checked});
         }
+        else if(e.target.name === 'profileImage'){
+            setFormData({...formData, [e.target.name] : e.target.files[0]});
+        }
         else{
             setFormData({...formData, [e.target.name] : e.target.value});
         }
@@ -28,7 +32,13 @@ const RegisterForm = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.log(formData);
+        // console.log(formData);
+        axios.post('/api/register', formData)
+        .then((res) => {
+            alert(res.data.message);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     return (

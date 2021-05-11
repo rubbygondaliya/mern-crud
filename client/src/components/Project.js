@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const Project = () => {
@@ -14,7 +15,13 @@ const Project = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.log(formData);
+        
+        axios.post('/api/add-project', formData)
+        .then((res) => {
+            alert("Project added successfully.");
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     return (
