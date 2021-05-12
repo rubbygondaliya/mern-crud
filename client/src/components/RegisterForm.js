@@ -32,13 +32,31 @@ const RegisterForm = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        // console.log(formData);
-        axios.post('/api/register', formData)
+        
+        let newformData = new FormData();
+        newformData.append('profileImage', formData.profileImage);
+        newformData.append('firstName', formData.firstName);
+        newformData.append('lastName', formData.lastName);
+        newformData.append('email', formData.email);
+        newformData.append('phone', formData.phone);
+        newformData.append('work', formData.work);
+        newformData.append('description', formData.description);
+        newformData.append('fresher', formData.fresher);
+        newformData.append('password', formData.password);
+
+        axios.post('/api/register', newformData)
         .then((res) => {
             alert(res.data.message);
         }).catch((error) => {
             console.log(error);
         });
+
+        /* axios.post('/api/register', formData)
+        .then((res) => {
+            alert(res.data.message);
+        }).catch((error) => {
+            console.log(error);
+        }); */
     }
 
     return (

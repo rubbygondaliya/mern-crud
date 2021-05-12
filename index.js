@@ -29,11 +29,13 @@ const PORT = process.env.PORT || 3001;
 
 require('./DB/dbconnect');
 
+app.use('/uploads', express.static('uploads'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 //routes middleware
 app.use("/api", userRoutes);
 app.use("/api", projectRoutes);
 
-app.use(express.static(__dirname + '/public'));
 
 app.use((req, res, next) => {
     // Error goes via `next()` method
@@ -43,7 +45,7 @@ app.use((req, res, next) => {
 });
 
 app.use(function (err, req, res, next) {
-    console.error(err.message);
+    // console.error(err.message);
     if (!err.statusCode) err.statusCode = 500;
     res.status(err.statusCode).send(err.message);
 });

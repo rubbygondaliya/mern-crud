@@ -20,6 +20,7 @@
 	"homepage": "https://github.com/rubbygondaliya/mern-crud#readme",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
+		"crypto": "^1.0.1",
 		"dotenv": "^9.0.2",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",
