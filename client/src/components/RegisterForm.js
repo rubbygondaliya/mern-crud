@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const RegisterForm = () => {
 
+    const history = useHistory();
     const[formData, setFormData] = useState({
         firstName:"",
         lastName:"",
@@ -47,6 +49,7 @@ const RegisterForm = () => {
         axios.post('/api/register', newformData)
         .then((res) => {
             alert(res.data.message);
+            history.push("/login");
         }).catch((error) => {
             console.log(error);
         });

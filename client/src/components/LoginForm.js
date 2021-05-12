@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const LoginForm = () => {
+    const history = useHistory();
     const [formData, setFormData] = useState({
         email:"",
         password:""
@@ -13,6 +15,7 @@ const LoginForm = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+        history.push("/add-project");
         console.log(formData);
     }
 

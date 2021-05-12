@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const Project = () => {
+    
+    const history = useHistory();
+    
     const [formData, setFormData] = useState({
         title:"",
         url:"",
@@ -19,6 +23,7 @@ const Project = () => {
         axios.post('/api/add-project', formData)
         .then((res) => {
             alert("Project added successfully.");
+            history.push("/project-list");
         }).catch((error) => {
             console.log(error);
         });

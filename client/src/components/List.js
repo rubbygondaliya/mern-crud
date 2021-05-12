@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Table } from 'reactstrap';
 
+const TrBlock = ({currElement}) => {
+    const { title, url} = currElement;
+    return (
+        <tr>
+            <td>{title}</td>
+            <td>{url}</td>
+            <td>Edit Delete</td>
+        </tr>
+    );
+}
+
 const List = () => {
+    const [projects, setProjects] = useState([]);
+    
+    useEffect(() => {
+        axios.get('/api/project-list')
+        .then((res) => {
+            // alert(res.data.projects[0].title);
+            setProjects(res.data.projects);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+    
     return (
         <div className="container mt-2">
             <div className="row">
@@ -9,19 +33,18 @@ const List = () => {
                 <Table bordered>
                     <thead>
                         <tr>
-                        <th>#</th>
                         <th>Title</th>
                         <th>Url</th>
                         <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
+                        {
+                            projects.map((curr) => {
+                                return <TrBlock currElement={curr} />;
+                            })
+                        }
+                        
                     </tbody>
                 </Table>
             </div>

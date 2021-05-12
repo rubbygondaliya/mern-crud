@@ -14,7 +14,10 @@ exports.addProject = async (req, res, next) => {
 
 exports.projectList = async (req, res, next) => {
     try {
-        
+        const list = await Project.find();
+        if(list){
+            return res.status(200).json({projects:list});
+        }
     } catch (error) {
         
     }
